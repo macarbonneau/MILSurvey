@@ -4,6 +4,7 @@ This files explains how to use this code.
 
 
 ## MIL Data Format ##
+By convention data set are called D. If there is a test data set it is called DT.
 Data sets are saved in an MILdataset object containing the following fields:
 
 #### Basic Fields ####
