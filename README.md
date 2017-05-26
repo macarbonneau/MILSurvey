@@ -31,7 +31,8 @@ http://yelab.net/software/SLEP/
 [5] J. Liu, S. Ji, and J. Ye. SLEP: Sparse Learning with Efficient Projections. Arizona State University, 2009. 
 
 6) EMD
-A package for earth mover's distance. A do not remember where it is from but it is included in the code here. sorry again.... 
+A package for earth mover's distance. 
+http://www.mathworks.com/matlabcentral/fileexchange/12936-emd-earth-movers-distance-mex-interface
 
 7) VLFeat 
 This is used only for the implementation of k-means in RSIS. It can be replaced by any other implementation if necessary.
