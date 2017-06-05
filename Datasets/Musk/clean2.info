@@ -1,0 +1,153 @@
+1. Title: MUSK "Clean2" database
+
+2. Sources:
+   (a) Creators:  AI Group at Arris Pharmaceutical Corporation
+        contact:  David Chapman or Ajay Jain
+                  Arris Pharmaceutical Corporation
+                  385 Oyster Point Blvd.
+                  South San Francisco, CA 94080
+                  415-737-8600
+                  zvona@arris.com, jain@arris.com
+   (b) Donor:     Tom Dietterich
+                  Department of Computer Science
+                  Oregon State University
+                  Corvallis, OR 97331
+                  503-737-5559
+                  tgd@cs.orst.edu
+   (c) Date received: September 12, 1994
+
+3. Past Usage:
+
+   (a) Dietterich, T. G., Jain, A., Lathrop, R., Lozano-Perez, T. (1994).
+       A comparison of dynamic reposing and tangent distance for drug
+       activity prediction.  Advances in Neural Information Processing
+       Systems, 6.  San Mateo, CA: Morgan Kaufmann.  216--223.
+
+       The clean2 dataset included here is derived from the starting
+       poses employed in this paper.  The paper reports the following
+       results:
+
+       Algorithm:                                 20-fold XVAL:
+       1-nearest neighbor (euclidean distance)    75%
+       neural network (standard poses)            75%
+       1-nearest neighbor (tangent distance)      79%
+       neural network (dynamic reposing)          91%
+
+       The tangent distance and dynamic reposing technique require
+       computation of the molecular surface, which cannot be done
+       using the feature vectors included in this data set.
+
+   (b) Jain, A. N., Dietterich, T. G., Lathrop, R. H., 
+       Chapman, D., Critchlow, R. E., Bauer, B. E., Webster, T. A.,
+       Lozano-Perez, T.  Compass: A shape-based machine learning tool for
+       drug design.  Accepted for publication in Computer-Aided
+       Molecular Design. 
+
+       This paper describes the dynamic reposing technique in more
+       detail and reports the same result for dynamic reposing as
+       above.  The paper also gives a complete description of each of
+       the 102 molecules in the data set.
+
+   (c) Dietterich, T. G., Lathrop, R. H., Lozano-Perez, T. (submitted)
+       Solving the multiple-instance problem with axis-parallel rectangles.
+       Submitted to Artificial Intelligence.
+
+       This paper describes a family of axis-parallel rectangle
+       algorithms and compares various approaches to the multiple
+       instance problem.  It includes the following table:
+
+        Algorithm             TP FN FP TN errs %correct [CI]
+        iterated-discrim APR  30  9  2 61  11  89.2 [83.2--95.2]
+        GFS elim-kde APR      32  7 13 50  20  80.4 [72.7--88.1]
+        GFS elim-count APR    31  8 17 46  25  75.5 [67.1--83.8]
+        all-positive APR      34  5 23 40  28  72.6 [63.9--81.2]
+        backpropagation       16 23 10 53  33  67.7 [58.6--76.7]
+        GFS all-positive APR  37  2 32 31  34  66.7 [57.5--75.8]
+        most frequent class    0 39  0 63  39  61.8 [52.3--71.2]
+        C4.5 (pruned)         32  7 35 28  42  58.8 [49.3--68.4]
+        
+        key: TP = true positives
+             FN = false negatives
+             FP = false positives
+             TN = true negatives
+             errs = errors = FN+FP
+             %correct = 10-fold cross-validation %correct.
+             CI = 95% confidence interval on proportion of correct
+             predictions.
+             For explanations of the various algorithms, see the
+             paper. 
+
+        C4.5 and backprop were applied ignoring the multiple instance
+        problem (see below) during training, but obeying it during
+        testing.  
+
+        This paper also gives more details on the construction of the
+        data set. 
+
+4. Relevant Information:
+   This dataset describes a set of 102 molecules of which 39 are judged
+   by human experts to be musks and the remaining 63 molecules are
+   judged to be non-musks.  The goal is to learn to predict whether
+   new molecules will be musks or non-musks.  However, the 166 features
+   that describe these molecules depend upon the exact shape, or
+   conformation, of the molecule.  Because bonds can rotate, a single
+   molecule can adopt many different shapes.  To generate this data
+   set, all the low-energy conformations of the molecules were
+   generated to produce 6,598 conformations.  Then, a feature vector
+   was extracted that describes each conformation. 
+
+   This many-to-one relationship between feature vectors and molecules
+   is called the "multiple instance problem".  When learning a
+   classifier for this data, the classifier should classify a molecule
+   as "musk" if ANY of its conformations is classified as a musk.  A
+   molecule should be classified as "non-musk" if NONE of its
+   conformations is classified as a musk.
+
+5. Number of Instances  6,598
+
+6. Number of Attributes 168 plus the class.
+
+7. For Each Attribute:
+   
+   Attribute:           Description:
+   molecule_name:       Symbolic name of each molecule.  Musks have names such
+                        as MUSK-188.  Non-musks have names such as
+                        NON-MUSK-jp13.
+   conformation_name:   Symbolic name of each conformation.  These
+                        have the format MOL_ISO+CONF, where MOL is the
+                        molecule number, ISO is the stereoisomer
+                        number (usually 1), and CONF is the
+                        conformation number. 
+   f1 through f162:     These are "distance features" along rays (see
+                        paper cited above).  The distances are
+                        measured in hundredths of Angstroms.  The
+                        distances may be negative or positive, since
+                        they are actually measured relative to an
+                        origin placed along each ray.  The origin was
+                        defined by a "consensus musk" surface that is
+                        no longer used.  Hence, any experiments with
+                        the data should treat these feature values as
+                        lying on an arbitrary continuous scale.  In
+                        particular, the algorithm should not make any
+                        use of the zero point or the sign of each
+                        feature value. 
+   f163:                This is the distance of the oxygen atom in the
+                        molecule to a designated point in 3-space.
+                        This is also called OXY-DIS.
+   f164:                OXY-X: X-displacement from the designated
+                        point.
+   f165:                OXY-Y: Y-displacement from the designated
+                        point.
+   f166:                OXY-Z: Z-displacement from the designated
+                        point. 
+   class:               0 => non-musk, 1 => musk
+
+   Please note that the molecule_name and conformation_name attributes
+   should not be used to predict the class.
+
+8. Missing Attribute Values: none.
+
+9. Class Distribution: 
+   Musks:     39
+   Non-musks: 63
+

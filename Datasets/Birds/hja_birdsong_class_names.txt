@@ -1,0 +1,13 @@
+1	BRCR - Brown Creeper
+2	WIWR - Winter Wren
+3	PSFL - Pacific-slope Flycatcher
+4	RBNU - Red-breasted Nuthatch
+5	DEJU - Dark-eyed Junco
+6	OSFL - Olive-sided Flycatcher
+7	HETH - Hermit Thrush
+8	CBCH - Chestnut-backed Chickadee
+9	VATH - Varied Thrush
+10	HEWA - Hermit Warbler
+11	SWTH - Swainson's Thrush
+12	HAFL - Hammond's Flycatcher
+13	WETA - Western Tanager
