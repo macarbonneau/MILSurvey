@@ -1,6 +1,6 @@
 # How to use #
 
-This files explains how to use this code.
+This files explains how to use this code. Make sure you installed all dependencies.
 
 
 ## MIL Data Format ##
@@ -22,3 +22,13 @@ Data sets are saved in an MILdataset object containing the following fields:
 * YS = is a vector used to tell if the instance were selected (usefull for certain algorithms).
 * QL = is a vector telling which instances have been queried in active learning.
 * QLB = is a vector telling which bags have been queried in active learning.
+
+## Performing an experiment ##
+1) Use the function called mainTestFucntion.m
+2) Specify which methods you want to use.
+3) Specify the name of the data set.
+
+For example, if you want to test mi-SVM and MInD on the Musk1 data set, write :
+mainTestFunction({'miSVM','MInD'},'musk1')
+
+When the data set is contained in a single object called D, the experiment will be performed as a 10x10-fold cross-validation. If a test set (DT) is included, the methods are trained on D and the results obtained on DT are reported. 
