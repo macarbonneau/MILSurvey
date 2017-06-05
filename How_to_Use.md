@@ -31,4 +31,14 @@ Data sets are saved in an MILdataset object containing the following fields:
 For example, if you want to test mi-SVM and MInD on the Musk1 data set, write :
 mainTestFunction({'miSVM','MInD'},'musk1')
 
-When the data set is contained in a single object called D, the experiment will be performed as a 10x10-fold cross-validation. If a test set (DT) is included, the methods are trained on D and the results obtained on DT are reported. 
+When the data set is contained in a single object called D, the experiment will be performed as a 10x10-fold cross-validation. If a test set (DT) is included, the methods are trained on D and the results obtained on DT are reported. There is an opt object which contains all configuration options for the experiment. 
+
+## Files explanation ##
+### getMethodConfig(method,dataset,expType) ###
+This file is used to specify the hyper-parameters values you want to use in the validation. These values depend on the data set and the type of test you want to perform. The values are saved in a vector inside the opt object. 
+
+### trainAndTestMIL(D, DT, method, opt) ###
+This function trains the specified method on D, and test on DT using the specified options in opt. It returns the predicted labels for the test data set in pred.
+
+
+
